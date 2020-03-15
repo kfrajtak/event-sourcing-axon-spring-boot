@@ -1,16 +1,17 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.config;
 
-import org.axonframework.common.jpa.EntityManagerProvider;
-import org.axonframework.common.transaction.TransactionManager;
-import org.axonframework.eventsourcing.eventstore.jpa.JpaEventStorageEngine;
+import com.progressivecoder.es.eventsourcingaxonspringboot.aggregates.AccountAggregate;
+import org.axonframework.eventsourcing.EventSourcingRepository;
+import org.axonframework.eventsourcing.eventstore.EventStore;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/*@Configuration
+@Configuration
 public class AxonAggregateConfig {
 
-    public JpaEventStorageEngine eventStorageEngine(EntityManagerProvider entityManagerProvider,
-                                                    TransactionManager transactionManager){
-        return new JpaEventStorageEngine(entityManagerProvider, transactionManager);
+    @Bean
+    EventSourcingRepository<AccountAggregate> accountAggregateEventSourcingRepository(EventStore eventStore){
+        EventSourcingRepository<AccountAggregate> repository = new EventSourcingRepository(AccountAggregate.class, eventStore);
+        return repository;
     }
-
-}*/
+}

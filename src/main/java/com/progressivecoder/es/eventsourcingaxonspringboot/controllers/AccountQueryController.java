@@ -1,5 +1,6 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.controllers;
 
+import com.progressivecoder.es.eventsourcingaxonspringboot.entities.AccountQueryEntity;
 import com.progressivecoder.es.eventsourcingaxonspringboot.services.queries.AccountQueryService;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,11 @@ public class AccountQueryController {
 
     public AccountQueryController(AccountQueryService accountQueryService) {
         this.accountQueryService = accountQueryService;
+    }
+
+    @GetMapping("/{accountNumber}")
+    public AccountQueryEntity getAccount(@PathVariable(value = "accountNumber") String accountNumber){
+        return accountQueryService.getAccount(accountNumber);
     }
 
     @GetMapping("/{accountNumber}/events")

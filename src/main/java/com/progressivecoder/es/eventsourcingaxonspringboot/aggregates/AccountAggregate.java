@@ -80,4 +80,20 @@ public class AccountAggregate {
     protected void on(AccountHeldEvent accountHeldEvent){
         this.status = String.valueOf(accountHeldEvent.status);
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }
