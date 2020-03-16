@@ -1,6 +1,6 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.commands;
 
-import org.axonframework.commandhandling.TargetAggregateIdentifier;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 public class BaseCommand<T> {
 
