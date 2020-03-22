@@ -1,14 +1,22 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.commands;
 
-public class CreateAccountCommand extends BaseCommand<String> {
+import lombok.Value;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-    public final double accountBalance;
+import java.util.UUID;
 
-    public final String currency;
+@Value
+public class CreateAccountCommand {
+    @TargetAggregateIdentifier
+    private String accountId;
+    private double accountBalance;
+    private final String currency;
+    private final double overdraftLimit;
 
-    public CreateAccountCommand(String id, double accountBalance, String currency) {
-        super(id);
+    public CreateAccountCommand(double accountBalance, String currency, double overdraftLimit) {
+        accountId = UUID.randomUUID().toString();
         this.accountBalance = accountBalance;
         this.currency = currency;
+        this.overdraftLimit = overdraftLimit;
     }
 }

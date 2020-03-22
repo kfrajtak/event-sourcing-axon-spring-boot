@@ -9,7 +9,6 @@ import com.progressivecoder.es.eventsourcingaxonspringboot.dto.commands.MoneyDeb
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -23,7 +22,7 @@ public class AccountCommandServiceImpl implements AccountCommandService {
 
     @Override
     public CompletableFuture<String> createAccount(AccountCreateDTO accountCreateDTO) {
-        return commandGateway.send(new CreateAccountCommand(UUID.randomUUID().toString(), accountCreateDTO.getStartingBalance(), accountCreateDTO.getCurrency()));
+        return commandGateway.send(new CreateAccountCommand(accountCreateDTO.getStartingBalance(), accountCreateDTO.getCurrency(), accountCreateDTO.getOverdraftLimit()));
     }
 
     @Override

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class QueuePublisher {
 
-    @Autowired
+    /*@Autowired
     private RabbitTemplate rabbitTemplate;
 
     @EventSourcingHandler
@@ -31,6 +31,6 @@ public class QueuePublisher {
                 RabbitMQQueue.topicExchangeName,
                 event.getClass().getSimpleName(),
                 json);
-    }
+    }*/
 }
 

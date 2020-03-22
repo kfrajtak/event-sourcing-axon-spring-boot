@@ -8,6 +8,9 @@ services:
     - 8024:8024
   rabbitmq:
     build: docker/rabbitmq
+    volumes:
+      - ./docker/rabbitmq/definitions.json:/opt/definitions.json:ro
+      - ./docker/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
     ports:
     - 4369:4369
     - 5671:5671

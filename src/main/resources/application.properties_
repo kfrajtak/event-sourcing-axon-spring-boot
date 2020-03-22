@@ -1,0 +1,12 @@
+#H2 settings
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+ampq_queue=hello
+
+axon.amqp.queue=hello
+axon.amqp.exchange=
+axon.amqp.durable-messages=true
+
+axon.eventhandling.processors.myQueueMessageSource.mode=TRACKING
+axon.eventhandling.processors.myQueueMessageSource.source=myQueueMessageSource
