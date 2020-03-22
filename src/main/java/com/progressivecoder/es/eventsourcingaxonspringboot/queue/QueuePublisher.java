@@ -1,5 +1,6 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.queue;
 
+import com.google.gson.Gson;
 import com.progressivecoder.es.eventsourcingaxonspringboot.aggregates.AccountAggregate;
 import com.progressivecoder.es.eventsourcingaxonspringboot.entities.AccountQueryEntity;
 import com.progressivecoder.es.eventsourcingaxonspringboot.entities.repositories.AccountRepository;
@@ -16,20 +17,20 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class QueuePublisher {
 
-    @Autowired
+    /*@Autowired
     private RabbitTemplate rabbitTemplate;
 
     @EventSourcingHandler
     void on(BaseEvent event) { publishEvent(event); }
 
     private void publishEvent(BaseEvent event) {
-        /*log.info("Publishing event {} to RabbitMQ ...", event.getClass().getSimpleName());
+        log.info("Publishing event {} to RabbitMQ ...", event.getClass().getSimpleName());
         Gson gson = new Gson();
         String json = gson.toJson(event);
         rabbitTemplate.convertAndSend(
                 RabbitMQQueue.topicExchangeName,
                 event.getClass().getSimpleName(),
-                json);*/
-    }
+                json);
+    }*/
 }
 

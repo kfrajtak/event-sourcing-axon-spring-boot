@@ -10,7 +10,7 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
 
 public class RabbitMQQueue {
-    static final String topicExchangeName = "spring-boot-exchange";
+    /*static final String topicExchangeName = "spring-boot-exchange";
     static final String queueName = "spring-boot";
 
     @Bean
@@ -41,5 +41,5 @@ public class RabbitMQQueue {
     @Bean
     MessageListenerAdapter listenerAdapter(Receiver receiver) {
         return new MessageListenerAdapter(receiver, "onMessage");
-    }
+    }*/
 }
