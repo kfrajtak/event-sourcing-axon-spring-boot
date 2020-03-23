@@ -1,5 +1,5 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.config;
-
+/*
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.config.ProcessingGroup;
@@ -27,3 +27,4 @@ public class RabbitMQSpringAMQPMessageSource extends SpringAMQPMessageSource {
         super.onMessage(message, channel);
     }
 }
+*/

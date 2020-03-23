@@ -2,17 +2,16 @@
 spring.h2.console.enabled: true
 spring.h2.console.path: /h2-console
 
-#axon.eventhandling.processors.myQueueMessageSource.mode=TRACKING
 axon:
   amqp:
     queue: hello
     exchange: sample
     durable-messages: true
-    eventhandling:
-      processors:
-        amqpEvents:
-          source: inputMessageSource
-          mode: subscribing
+    #eventhandling:
+    #  processors:
+    #    amqpEvents:
+    #      source: inputMessageSource
+    #      mode: subscribing
   serializer:
     general: jackson
     events: jackson
