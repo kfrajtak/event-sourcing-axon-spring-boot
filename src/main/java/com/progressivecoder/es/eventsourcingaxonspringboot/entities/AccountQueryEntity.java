@@ -1,11 +1,17 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
+@Getter
+@Setter
+@ToString
 public class AccountQueryEntity {
-
     @Id
     private String id;
 
@@ -14,49 +20,4 @@ public class AccountQueryEntity {
     private String currency;
 
     private String status;
-
-    public AccountQueryEntity() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public double getAccountBalance() {
-        return accountBalance;
-    }
-
-    public void setAccountBalance(double accountBalance) {
-        this.accountBalance = accountBalance;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "AccountQueryEntity{" +
-                "id='" + id + '\'' +
-                ", accountBalance=" + accountBalance +
-                ", currency='" + currency + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
 }

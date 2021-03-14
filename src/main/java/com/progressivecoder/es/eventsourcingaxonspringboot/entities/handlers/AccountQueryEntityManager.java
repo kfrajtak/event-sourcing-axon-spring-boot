@@ -4,6 +4,7 @@ import com.progressivecoder.es.eventsourcingaxonspringboot.aggregates.AccountAgg
 import com.progressivecoder.es.eventsourcingaxonspringboot.entities.AccountQueryEntity;
 import com.progressivecoder.es.eventsourcingaxonspringboot.entities.repositories.AccountRepository;
 import com.progressivecoder.es.eventsourcingaxonspringboot.events.BaseEvent;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 //@Component
+@Slf4j
 public class AccountQueryEntityManager {
 
     @Autowired
@@ -45,6 +47,8 @@ public class AccountQueryEntityManager {
     }
 
     private void persistAccount(AccountQueryEntity accountQueryEntity){
-        accountRepository.save(accountQueryEntity);
+        log.info("Persisting entity {}...", accountQueryEntity);
+        AccountQueryEntity entity = accountRepository.save(accountQueryEntity);
+        log.info("Persisted entity {}...", entity);
     }
 }

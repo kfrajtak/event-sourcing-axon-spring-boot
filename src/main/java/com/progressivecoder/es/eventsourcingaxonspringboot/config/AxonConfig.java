@@ -1,37 +1,17 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.config;
 
-//import org.springframework.amqp.core.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.progressivecoder.es.eventsourcingaxonspringboot.aggregates.AccountAggregate;
+import org.axonframework.eventsourcing.EventSourcingRepository;
+import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 public class AxonConfig {
-/*
-    @Value("${axon.amqp.exchange}")
-    private String exchange;
 
     @Bean
-    public Exchange exchange() {
-        return ExchangeBuilder.fanoutExchange(exchange).build();
+    EventSourcingRepository<AccountAggregate> accountAggregateEventSourcingRepository(EventStore eventStore){
+        EventSourcingRepository<AccountAggregate> repository = EventSourcingRepository.builder(AccountAggregate.class).eventStore(eventStore).build();
+        return repository;
     }
-
-    @Bean
-    public Queue queue() {
-        return QueueBuilder.durable(exchange).build();
-    }
-
-    @Bean
-    public Binding binding() {
-        return BindingBuilder.bind(queue()).to(exchange()).with("*").noargs();
-    }
-
-    @Autowired
-    public void configure(AmqpAdmin amqpAdmin) {
-        amqpAdmin.declareExchange(exchange());
-
-        amqpAdmin.declareQueue(queue());
-        amqpAdmin.declareBinding(binding());
-    }*/
 }

@@ -24,13 +24,13 @@ public class QueuePublisher {
     void on(BaseEvent event) { publishEvent(event); }
 
     private void publishEvent(BaseEvent event) {
-        log.info("Publishing event {} to RabbitMQ ...", event.getClass().getSimpleName());
+        /*log.info("Publishing event {} to RabbitMQ ...", event.getClass().getSimpleName());
         Gson gson = new Gson();
         String json = gson.toJson(event);
         rabbitTemplate.convertAndSend(
                 RabbitMQQueue.topicExchangeName,
                 event.getClass().getSimpleName(),
-                json);
+                json);*/
     }
 }
 
