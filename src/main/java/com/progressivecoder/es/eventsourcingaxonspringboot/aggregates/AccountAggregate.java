@@ -56,8 +56,12 @@ public class AccountAggregate {
     }
 
     @EventSourcingHandler
-    protected void on(MoneyCreditedEvent moneyCreditedEvent) {
+    protected void on(MoneyDepositedEvent moneyDepositedEvent) {
+        this.accountBalance += moneyDepositedEvent.getAmount();
+    }
 
+    @EventSourcingHandler
+    protected void on(MoneyCreditedEvent moneyCreditedEvent) {
         if (this.accountBalance < 0 & (this.accountBalance + moneyCreditedEvent.creditAmount) >= 0) {
             apply(new AccountActivatedEvent(this.id, Status.ACTIVATED));
         }
@@ -86,6 +90,7 @@ public class AccountAggregate {
             throw new OverdraftLimitExceededException();
         }
 
+        accountBalance -= cmd.getAmount();
         apply(new MoneyWithdrawnEvent(id, cmd.getTransactionId(), cmd.getAmount(), accountBalance - cmd.getAmount()));
     }
 
