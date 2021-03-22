@@ -1,9 +1,6 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.aggregates;
 
-import com.progressivecoder.es.eventsourcingaxonspringboot.commands.CreateAccountCommand;
-import com.progressivecoder.es.eventsourcingaxonspringboot.commands.CreditMoneyCommand;
-import com.progressivecoder.es.eventsourcingaxonspringboot.commands.DebitMoneyCommand;
-import com.progressivecoder.es.eventsourcingaxonspringboot.commands.WithdrawMoneyCommand;
+import com.progressivecoder.es.eventsourcingaxonspringboot.commands.*;
 import com.progressivecoder.es.eventsourcingaxonspringboot.events.*;
 import com.progressivecoder.es.eventsourcingaxonspringboot.exceptions.AccountHeldException;
 import com.progressivecoder.es.eventsourcingaxonspringboot.exceptions.OverdraftLimitExceededException;
@@ -52,6 +49,11 @@ public class AccountAggregate {
     protected void on(CreditMoneyCommand creditMoneyCommand) {
         apply(new MoneyCreditedEvent(creditMoneyCommand.id, creditMoneyCommand.creditAmount, creditMoneyCommand.currency));
     }
+
+    /*@CommandHandler
+    protected void on(DepositMoneyCommand depositMoneyCommand) {
+        apply(new MoneyDepositedEvent(depositMoneyCommand.transactionId, depositMoneyCommand.accountId, 0, depositMoneyCommand.amount));
+    }*/
 
     @EventSourcingHandler
     protected void on(MoneyCreditedEvent moneyCreditedEvent) {
