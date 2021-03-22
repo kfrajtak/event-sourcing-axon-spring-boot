@@ -52,7 +52,7 @@ public class AccountAggregate {
 
     @CommandHandler
     protected void on(DepositMoneyCommand cmd) {
-        apply(new MoneyDepositedEvent(id, cmd.getTransactionId(), cmd.getAmount(), accountBalance + cmd.getAmount()));
+        apply(new MoneyDepositedEvent(cmd.getTransactionId(), cmd.getTargetAccountId(),accountBalance + cmd.getAmount(), cmd.getAmount()));
     }
 
     @EventSourcingHandler
