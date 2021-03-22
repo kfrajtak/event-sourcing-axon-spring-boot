@@ -10,8 +10,14 @@
       "arguments": {}
     }
   ],
-  "queues":[
-    {"name":"hello","vhost":"/","durable":true,"auto_delete":false,"arguments":{}}
+  "queues": [
+    {
+      "name": "hello",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
   ],
   "bindings": [
     {
