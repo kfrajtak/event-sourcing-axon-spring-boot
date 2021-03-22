@@ -32,7 +32,7 @@ public class MoneyTransferSaga {
         targetAccountId = event.getTargetBankAccountId();
         transactionId = event.getTransactionId();
         // associate the Saga with these values, before sending the commands (see SagaEventHandler below)
-        // transactionId is enough for saga indentifier
+        // transactionId is enough for saga identifier
         SagaLifecycle.associateWith("transactionId", transactionId);
         commandGateway.send(new WithdrawMoneyCommand(event.getSourceAccountId(), transactionId, event.getAmount()),
                 (commandMessage, commandResultMessage) -> {
