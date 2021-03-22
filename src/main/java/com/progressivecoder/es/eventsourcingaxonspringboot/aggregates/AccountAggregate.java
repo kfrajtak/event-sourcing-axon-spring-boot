@@ -50,10 +50,10 @@ public class AccountAggregate {
         apply(new MoneyCreditedEvent(creditMoneyCommand.id, creditMoneyCommand.creditAmount, creditMoneyCommand.currency));
     }
 
-    /*@CommandHandler
-    protected void on(DepositMoneyCommand depositMoneyCommand) {
-        apply(new MoneyDepositedEvent(depositMoneyCommand.transactionId, depositMoneyCommand.accountId, 0, depositMoneyCommand.amount));
-    }*/
+    @CommandHandler
+    protected void on(DepositMoneyCommand cmd) {
+        apply(new MoneyDepositedEvent(id, cmd.getTransactionId(), cmd.getAmount(), accountBalance + cmd.getAmount()));
+    }
 
     @EventSourcingHandler
     protected void on(MoneyCreditedEvent moneyCreditedEvent) {
