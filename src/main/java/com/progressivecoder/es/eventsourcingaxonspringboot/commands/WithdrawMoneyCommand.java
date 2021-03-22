@@ -5,7 +5,6 @@ import lombok.Value;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 @Value
-@AllArgsConstructor
 public class WithdrawMoneyCommand {
     @TargetAggregateIdentifier
     String sourceAccountId;
