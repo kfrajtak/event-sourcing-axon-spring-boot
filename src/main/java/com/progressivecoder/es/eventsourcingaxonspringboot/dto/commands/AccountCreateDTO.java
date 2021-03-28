@@ -1,8 +1,8 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.dto.commands;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class AccountCreateDTO {
     private double startingBalance;
     private String currency;

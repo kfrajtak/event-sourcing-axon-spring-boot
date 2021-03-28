@@ -16,8 +16,13 @@ public class RabbitConfiguration {
     static final String queueName = "AccountActivated";
 
     @Bean
-    Queue queue() {
+    Queue accountActivatedQueue() {
         return new Queue(queueName, true);
+    }
+
+    @Bean
+    Queue commandQueue() {
+        return new Queue("CommandQueue", true);
     }
 
     @Bean
@@ -26,7 +31,12 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("AccountActivatedEvent");
+    Binding binding1(Queue accountActivatedQueue, TopicExchange exchange) {
+        return BindingBuilder.bind(accountActivatedQueue).to(exchange).with("AccountActivatedEvent");
+    }
+
+    @Bean
+    Binding binding2(Queue commandQueue, TopicExchange exchange) {
+        return BindingBuilder.bind(commandQueue).to(exchange).with("Command");
     }
 }
