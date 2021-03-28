@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class QueuePublisher {
 
-    /*@Autowired
+    @Autowired
     private RabbitTemplate rabbitTemplate;
 
     @EventSourcingHandler
@@ -28,9 +28,9 @@ public class QueuePublisher {
         Gson gson = new Gson();
         String json = gson.toJson(event);
         rabbitTemplate.convertAndSend(
-                RabbitMQQueue.topicExchangeName,
-                event.getClass().getSimpleName(),
-                json);
-    }*/
+            RabbitConfiguration.topicExchangeName,
+            event.getClass().getSimpleName(),
+            json);
+    }
 }
 
