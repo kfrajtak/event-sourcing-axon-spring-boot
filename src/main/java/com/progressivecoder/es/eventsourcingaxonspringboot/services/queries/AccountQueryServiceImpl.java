@@ -19,6 +19,7 @@ public class AccountQueryServiceImpl implements AccountQueryService {
         this.eventStore = eventStore;
         this.accountRepository = accountRepository;
     }
+
     @Override
     public List<Object> listEventsForAccount(String accountNumber) {
         return eventStore.readEvents(accountNumber).asStream().map( s -> s.getPayload()).collect(Collectors.toList());

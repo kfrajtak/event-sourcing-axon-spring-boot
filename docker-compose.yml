@@ -1,11 +1,11 @@
 version: '2'
 
-services:
-  axonserver:
-    image: axoniq/axonserver
-    ports:
-    - 8124:8124
-    - 8024:8024
+#services:
+#  axonserver:
+#    image: axoniq/axonserver
+#    ports:
+#    - 8124:8124
+#    - 8024:8024
   #rabbitmq:
   #  build: docker/rabbitmq
   #  volumes:
