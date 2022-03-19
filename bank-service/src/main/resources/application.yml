@@ -7,6 +7,10 @@ spring.h2.console.path: /h2-console
 #    amqpEvents:
 #      source: inputMessageSource
 #      mode: subscribing
+spring:
+  rabbitmq:
+    username: consumer
+    password: empty
 
 #axon:
 #  axonserver:
