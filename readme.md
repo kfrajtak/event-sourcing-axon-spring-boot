@@ -24,4 +24,8 @@ Publishing events from Python application to RabbitMQ. Spring Boot application w
    - message is send to the exchange and queue
 1. RabbitMQ listener in Spring Boot application will handle it
 
- 
+## Demo III - Gateway
+
+```
+curl -X POST "http://localhost:8180/bank-service/bank-accounts" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"currency\": \"CZK\", \"overdraftLimit\": 0, \"startingBalance\": 2000}"
+```
