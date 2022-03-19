@@ -1,0 +1,41 @@
+server:
+  port: 8180
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: bank-service
+          uri: http://localhost:8080
+          predicates:
+            - Path=/bank-service/**
+          # https://www.baeldung.com/spring-cloud-gateway-url-rewriting
+          filters:
+            - RewritePath=/bank-service/(?<segment>.*),/$\{segment}
+        - id: route1
+          uri: http://localhost:8080
+          predicates:
+            - Path=/backend
+          # https://spring.io/blog/2021/04/05/api-rate-limiting-with-spring-cloud-gateway
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 500
+                redis-rate-limiter.burstCapacity: 1000
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    info:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        # http://localhost:8180/actuator/gateway/routes
+        include: gateway
+    enabled-by-default: true
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace

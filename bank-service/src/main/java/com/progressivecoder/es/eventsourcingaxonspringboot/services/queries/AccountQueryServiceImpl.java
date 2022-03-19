@@ -1,0 +1,34 @@
+package com.progressivecoder.es.eventsourcingaxonspringboot.services.queries;
+
+import com.progressivecoder.es.eventsourcingaxonspringboot.entities.AccountQueryEntity;
+import com.progressivecoder.es.eventsourcingaxonspringboot.entities.repositories.AccountRepository;
+import org.axonframework.eventsourcing.eventstore.EventStore;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class AccountQueryServiceImpl implements AccountQueryService {
+
+    private final EventStore eventStore;
+
+    private final AccountRepository accountRepository;
+
+    public AccountQueryServiceImpl(EventStore eventStore, AccountRepository accountRepository) {
+        this.eventStore = eventStore;
+        this.accountRepository = accountRepository;
+    }
+
+    @Override
+    public List<Object> listEventsForAccount(String accountNumber) {
+        return eventStore.readEvents(accountNumber).asStream().map(s -> s.getPayload()).collect(Collectors.toList());
+    }
+
+    @Override
+    public AccountQueryEntity getAccount(String accountNumber) {
+        return accountRepository.findById(accountNumber).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "account not found"));
+    }
+}
