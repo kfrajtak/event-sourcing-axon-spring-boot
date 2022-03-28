@@ -29,3 +29,21 @@ Publishing events from Python application to RabbitMQ. Spring Boot application w
 ```
 curl -X POST "http://localhost:8180/bank-service/bank-accounts" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"currency\": \"CZK\", \"overdraftLimit\": 0, \"startingBalance\": 2000}"
 ```
+
+## Telemetry
+
+1. Download the agent from https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.12.0/opentelemetry-javaagent.jar
+2. Set ENV variable with the name of the service 
+
+On Windows
+```
+java -javaagent:C:\Users\kfrajtak\Downloads\opentelemetry-javaagent.jar -Dotel.resource.attributes=service.name=bank-service -jar bank-service\target\event-sourcing-axon-spring-boot-0.0.1-SNAPSHOT.jar       
+```
+
+On Unix (or in Windows bash)
+```
+java -javaagent:/c/users/kfrajtak/Downloads/opentelemetry-javaagent.jar \
+     -Dotel.resource.attributes=service.name=bank-service \
+     -jar ./bank-service/target/event-sourcing-axon-spring-boot-0.0.1-SNAPSHOT.jar
+```
+

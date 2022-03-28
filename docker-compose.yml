@@ -4,10 +4,8 @@ services:
   axonserver:
     image: axoniq/axonserver
     ports:
-    - 8124:8124
-    - 8024:8024
-    networks:
-    - swa
+      - 8124:8124
+      - 8024:8024
     logging:
       driver: none
   rabbitmq:
@@ -18,19 +16,31 @@ services:
     logging:
       driver: none
     ports:
-    - 4369:4369
-    - 5671:5671
-    - 5672:5672
-    - 15671:15671
-    - 15672:15672
-    - 25672:25672
-    networks:
-    - swa
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15671:15671
+      - 15672:15672
+      - 25672:25672
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268"
+      - "14250"
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib-dev:latest
+    command: [ "--config=/etc/otel-collector-config.yaml" ]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "1888:1888"   # pprof extension
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4317:4317"        # OTLP gRPC receiver
+      - "55670:55679" # zpages extension
+    depends_on:
+      - jaeger
   python-service:
     build: python-service
-    networks:
-    - swa
-networks:
-  swa:
-    external:
-      name: swa
