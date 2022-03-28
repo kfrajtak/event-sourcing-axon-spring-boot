@@ -33,17 +33,39 @@ curl -X POST "http://localhost:8180/bank-service/bank-accounts" -H "accept: */*"
 ## Telemetry
 
 1. Download the agent from https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.12.0/opentelemetry-javaagent.jar
-2. Set ENV variable with the name of the service 
+2. Package `bank-service` and `gateway-service`
+3. Open console for each service 
+4. Set ENV variable with the name of the service 
 
+**Java 1.8 must be used!**
+
+### Gateway service
 On Windows
 ```
-java -javaagent:C:\Users\kfrajtak\Downloads\opentelemetry-javaagent.jar -Dotel.resource.attributes=service.name=bank-service -jar bank-service\target\event-sourcing-axon-spring-boot-0.0.1-SNAPSHOT.jar       
+set OTEL_SERVICE_NAME=gateway-service
+java -javaagent:path\to\opentelemetry-javaagent.jar -Dotel.service.name=gateway-service -jar gateway-service\target\gateway-service-0.0.1-SNAPSHOT.jar       
 ```
 
 On Unix (or in Windows bash)
 ```
-java -javaagent:/c/users/kfrajtak/Downloads/opentelemetry-javaagent.jar \
-     -Dotel.resource.attributes=service.name=bank-service \
+export OTEL_SERVICE_NAME gateway-service
+java -javaagent:/path/to/opentelemetry-javaagent.jar \
+     -Dotel.service.name=gateway-service \     
+     -jar ./gateway-service/target/gateway-service-0.0.1-SNAPSHOT.jar
+```
+
+### Bank Service
+On Windows
+```
+set OTEL_SERVICE_NAME=bank-service
+java -javaagent:path\to\opentelemetry-javaagent.jar -Dotel.resource.attributes=service.name=bank-service -jar bank-service\target\event-sourcing-axon-spring-boot-0.0.1-SNAPSHOT.jar       
+```
+
+On Unix (or in Windows bash)
+```
+export OTEL_SERVICE_NAME bank-service
+java -javaagent:/path/to/opentelemetry-javaagent.jar \
+     -Dotel.service.name=bank-service \
      -jar ./bank-service/target/event-sourcing-axon-spring-boot-0.0.1-SNAPSHOT.jar
 ```
 
