@@ -1,0 +1,26 @@
+{
+  "exchanges": [
+    {
+      "name": "sample",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues":[
+    {"name":"hello","vhost":"/","durable":true,"auto_delete":false,"arguments":{}}
+  ],
+  "bindings": [
+    {
+      "source": "sample",
+      "vhost": "/",
+      "destination": "hello",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    }
+  ]
+}
