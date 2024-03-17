@@ -2,7 +2,7 @@ version: '2'
 
 services:
   axonserver:
-    image: axoniq/axonserver
+    image: axoniq/axonserver:4.6.9
     ports:
     - 8124:8124
     - 8024:8024
