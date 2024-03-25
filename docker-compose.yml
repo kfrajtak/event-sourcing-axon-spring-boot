@@ -6,15 +6,15 @@ services:
     ports:
     - 8124:8124
     - 8024:8024
-  #rabbitmq:
-  #  build: docker/rabbitmq
-  #  volumes:
-  #    - ./docker/rabbitmq/definitions.json:/opt/definitions.json:ro
-  #    - ./docker/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
-  ##  ports:
-  #  - 4369:4369
-  #  - 5671:5671
-  #  - 5672:5672
-  #  - 15671:15671
-  #  - 15672:15672
-  #  - 25672:25672
+  rabbitmq:
+    build: docker/rabbitmq
+    volumes:
+      - ./docker/rabbitmq/definitions.json:/opt/definitions.json:ro
+      - ./docker/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15671:15671
+      - 15672:15672
+      - 25672:25672
