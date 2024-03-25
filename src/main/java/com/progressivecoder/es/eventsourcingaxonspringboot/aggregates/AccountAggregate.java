@@ -82,7 +82,7 @@ public class AccountAggregate {
 
     @CommandHandler
     public void on(WithdrawMoneyCommand cmd) throws OverdraftLimitExceededException, AccountHeldException {
-        if (status.equals(Status.HOLD))
+        if (status.equals(String.valueOf(Status.HOLD)))
         {
             throw new AccountHeldException();
         }
