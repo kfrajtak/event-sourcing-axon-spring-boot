@@ -1,22 +1,18 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.config;
 
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.Collections;
 
 @Configuration
-@EnableSwagger2
+// @EnableSwagger
 public class SwaggerConfig {
 
-    @Bean
+    /*@Bean
     public Docket apiDocket(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
@@ -24,19 +20,22 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(getApiInfo());
-    }
+    }*/
 
-    private ApiInfo getApiInfo(){
-        return new ApiInfo(
-                "Event Sourcing using Axon and Spring Boot",
-                "App to demonstrate Event Sourcing using Axon and Spring Boot",
-                "1.0.0",
-                "Terms of Service",
-                new Contact("Saurabh Dashora", "progressivecoder.com", "coder.progressive@gmail.com"),
-                "",
-                "",
-                Collections.emptyList());
+    @Bean
+    public OpenAPI springShopOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Event Sourcing using Axon and Spring Boot")
+                        .contact(
+                                new Contact().name("Saurabh Dashora")
+                        )
+                        .description("App to demonstrate Event Sourcing using Axon and Spring Boot")
+                        .version("v1.0.0")
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
+                .externalDocs(new ExternalDocumentation()
+                        .description("SpringShop Wiki Documentation")
+                        .url("https://springshop.wiki.github.org/docs"));
     }
-
 }
 

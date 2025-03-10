@@ -1,6 +1,5 @@
 package com.progressivecoder.es.eventsourcingaxonspringboot.queue;
 
-import com.google.gson.Gson;
 import com.progressivecoder.es.eventsourcingaxonspringboot.aggregates.AccountAggregate;
 import com.progressivecoder.es.eventsourcingaxonspringboot.entities.AccountQueryEntity;
 import com.progressivecoder.es.eventsourcingaxonspringboot.entities.repositories.AccountRepository;
