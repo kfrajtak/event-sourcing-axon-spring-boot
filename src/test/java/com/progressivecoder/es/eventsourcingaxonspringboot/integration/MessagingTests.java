@@ -11,13 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.rule.OutputCapture;
+import org.springframework.boot.test.system.OutputCaptureRule;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 
@@ -32,8 +33,8 @@ import static org.hamcrest.CoreMatchers.is;
 @ContextConfiguration(initializers = MessagingTests.Initializer.class)
 public class MessagingTests {
     @ClassRule
-    public static GenericContainer rabbit =
-            new GenericContainer("rabbitmq:3.8.14-alpine")
+    public static RabbitMQContainer rabbit =
+            new RabbitMQContainer("rabbitmq:3.8.14-alpine")
                     .withExposedPorts(5672);
 
     @ClassRule
@@ -43,7 +44,7 @@ public class MessagingTests {
                     .withExposedPorts(8024, 8124)
                     .waitingFor(Wait.forHttp("/actuator/health").forPort(8024));
     @Rule
-    public OutputCapture outputCapture = new OutputCapture();
+    OutputCaptureRule outputCaptureRule = new OutputCaptureRule();
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -95,7 +96,7 @@ public class MessagingTests {
     }
 
     private Callable<Boolean> isMessageConsumed() {
-        return () -> outputCapture.toString().contains("AccountCreateDTO(startingBalance=432.1, currency=USD, overdraftLimit=0.0)");
+        return () -> outputCaptureRule.toString().contains("AccountCreateDTO(startingBalance=432.1, currency=USD, overdraftLimit=0.0)");
     }
 
     @Slf4j

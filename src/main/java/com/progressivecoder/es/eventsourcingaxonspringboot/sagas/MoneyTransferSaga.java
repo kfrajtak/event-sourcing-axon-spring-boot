@@ -12,14 +12,13 @@ import org.axonframework.modelling.saga.SagaEventHandler;
 import org.axonframework.modelling.saga.SagaLifecycle;
 import org.axonframework.modelling.saga.StartSaga;
 import org.axonframework.spring.stereotype.Saga;
-
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.axonframework.modelling.saga.SagaLifecycle.end;
 
 @Saga
 public class MoneyTransferSaga {
-    @Inject
+    @Autowired
     private transient CommandGateway commandGateway;
 
     private String targetAccountId;

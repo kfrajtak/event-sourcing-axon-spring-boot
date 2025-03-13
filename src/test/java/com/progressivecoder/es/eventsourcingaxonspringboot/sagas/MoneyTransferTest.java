@@ -10,8 +10,8 @@ import org.axonframework.test.aggregate.FixtureConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
+// https://docs.axoniq.io/axon-framework-reference/4.10/testing/sagas-1/
 public class MoneyTransferTest {
-
     private FixtureConfiguration<MoneyTransferAggregate> fixture;
 
     @Before

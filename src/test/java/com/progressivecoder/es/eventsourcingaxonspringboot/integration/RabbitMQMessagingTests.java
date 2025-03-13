@@ -32,17 +32,17 @@ import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ContextConfiguration(initializers = MessagingTests2.Initializer.class)
-public class MessagingTests2 {
+@ContextConfiguration(initializers = RabbitMQMessagingTests.Initializer.class)
+public class RabbitMQMessagingTests {
     // Use @ClassRule to set up something that can be reused by all the test methods, if you can achieve that in a static method.
     @ClassRule
     public static GenericContainer rabbit =
-            new GenericContainer("rabbitmq:3.8.14-alpine")
+            new GenericContainer("rabbitmq:3.8.3-management-alpine")
                     .withExposedPorts(5672);
 
     @ClassRule
     public static GenericContainer axon =
-            new GenericContainer("axoniq/axonserver")
+            new GenericContainer("axoniq/axonserver:4.6.9")
                     .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("docker.axonserver")))
                     .withExposedPorts(8024, 8124)
             .waitingFor(Wait.forHttp("/actuator/health").forPort(8024));
